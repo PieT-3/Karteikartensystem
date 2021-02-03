@@ -54,8 +54,30 @@ namespace Karteikartensystem
             return ergebnis;
         }
 
+        private static DataTable GetDataEinträge(string sqlCommand)
+        {
+            string connectionString = "Integrated Security=SSPI;" +
+                "Persist Security Info=False;" +
+                "Initial Catalog=Karteikartensystem;Data Source=localhost";
+
+            DataTable table = new DataTable();
+
+            using (SqlConnection karteikartensystemConnection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlCommand, karteikartensystemConnection);
+
+                karteikartensystemConnection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                table.Load(reader);
+            }
+
+            return table;
+        }
+
         // Daten aus Datenbank abrufen
-        private static DataTable GetData(string sqlCommand)
+        private static DataTable GetDataDGV(string sqlCommand)
         {
             string connectionString = "Integrated Security=SSPI;" +
                 "Persist Security Info=False;" +
@@ -63,13 +85,17 @@ namespace Karteikartensystem
 
             SqlConnection karteikartensystemConnection = new SqlConnection(connectionString);
 
+            //karteikartensystemConnection.Open();
+
             SqlCommand command = new SqlCommand(sqlCommand, karteikartensystemConnection);
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
 
             DataTable table = new DataTable();
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            //table.Locale = System.Globalization.CultureInfo.InvariantCulture;
             adapter.Fill(table);
+
+            //karteikartensystemConnection.Close();
 
             return table;
         }
@@ -88,7 +114,7 @@ namespace Karteikartensystem
             else if (tC_Menüführung.SelectedIndex == 1)
             {
                 dGV_Lernfeld.AutoGenerateColumns = true;
-                dGV_Lernfeld.DataSource = GetData("Select Lernfeldname From tb_Lernfeld As Lernfeldname");
+                dGV_Lernfeld.DataSource = GetDataDGV("Select Lernfeldname From tb_Lernfeld As Lernfeldname");
             }
             else{}
         }
@@ -102,7 +128,7 @@ namespace Karteikartensystem
                 //Ausgewählte Zeile in Variable abspeichern
                 String ausgewähltesLernfeld = Convert.ToString(dGV_Lernfeld.Rows[e.RowIndex].Cells[0].Value);
 
-                dGV_Unterkategorie.DataSource = GetData("SELECT dbo.tb_Unterkategorie.Unterkategoriename AS Unterkategorie " +
+                dGV_Unterkategorie.DataSource = GetDataDGV("SELECT dbo.tb_Unterkategorie.Unterkategoriename AS Unterkategorie " +
                                                         "FROM dbo.tb_Unterkategorie " +
                                                         "INNER JOIN dbo.tb_ZuordnungLernfeldUnterkategorie " +
                                                         "ON dbo.tb_Unterkategorie.UnterkategorieID = dbo.tb_ZuordnungLernfeldUnterkategorie.UnterkategorieID " +
@@ -111,6 +137,24 @@ namespace Karteikartensystem
                                                         $"WHERE(dbo.tb_Lernfeld.Lernfeldname = N'{ausgewähltesLernfeld}')");
             }
 
+        }
+
+        private void dGV_Unterkategorie_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dGV_Unterkategorie.CurrentCell != null)
+            {
+                dGV_Einträge.AutoGenerateColumns = true;
+                //Ausgewählte Zeile in Variable abspeichern
+                String ausgewählteUnterkategorie = Convert.ToString(dGV_Unterkategorie.Rows[e.RowIndex].Cells[0].Value);
+
+                dGV_Einträge.DataSource = GetDataEinträge("SELECT dbo.tb_A_Seite.A_SeiteInhalt AS[A - Seite], dbo.tb_B_Seite.B_SeiteInhalt AS[B - Seite]" +
+                                                          "FROM dbo.tb_A_Seite " +
+                                                          "INNER JOIN dbo.tb_Eintrag ON dbo.tb_A_Seite.A_SeiteID = dbo.tb_Eintrag.A_SeiteID " +
+                                                          "INNER JOIN dbo.tb_B_Seite ON dbo.tb_Eintrag.B_SeiteID = dbo.tb_B_Seite.B_SeiteID " +
+                                                          "INNER JOIN dbo.tb_ZuordnungUnterkategorieEintrag ON dbo.tb_Eintrag.EintragID = dbo.tb_ZuordnungUnterkategorieEintrag.EintragID " +
+                                                          "INNER JOIN dbo.tb_Unterkategorie ON dbo.tb_ZuordnungUnterkategorieEintrag.UnterkategorieID = dbo.tb_Unterkategorie.UnterkategorieID " +
+                                                          $"WHERE(dbo.tb_Unterkategorie.Unterkategoriename = N'{ausgewählteUnterkategorie}')");
+            }
         }
 
         private void btn_Lerninhalt_verändern_Click(object sender, EventArgs e)
@@ -154,5 +198,6 @@ namespace Karteikartensystem
             }
 
         }
+
     }
 }

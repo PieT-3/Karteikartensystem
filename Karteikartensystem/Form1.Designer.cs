@@ -33,26 +33,26 @@ namespace Karteikartensystem
             this.btn_Lernen_heute = new System.Windows.Forms.Button();
             this.tC_Menüführung = new System.Windows.Forms.TabControl();
             this.tP_Lernen = new System.Windows.Forms.TabPage();
+            this.pnl_Aktelle_Einträge = new System.Windows.Forms.Panel();
+            this.lbl_Viel_Spaß = new System.Windows.Forms.Label();
+            this.lbl_Anzahl_Einträge_1 = new System.Windows.Forms.Label();
             this.lbl_Anzahl_Einträge_2 = new System.Windows.Forms.Label();
             this.lbl_Anzahl_Einträge_Zahl = new System.Windows.Forms.Label();
-            this.lbl_Anzahl_Einträge_1 = new System.Windows.Forms.Label();
-            this.lbl_Viel_Spaß = new System.Windows.Forms.Label();
             this.tP_Lerninhalt = new System.Windows.Forms.TabPage();
+            this.btn_Lerninhalt_verändern = new System.Windows.Forms.Button();
             this.dGV_Einträge = new System.Windows.Forms.DataGridView();
             this.dGV_Unterkategorie = new System.Windows.Forms.DataGridView();
             this.dGV_Lernfeld = new System.Windows.Forms.DataGridView();
             this.tP_Einstellungen = new System.Windows.Forms.TabPage();
             this.btn_Kästen_bearbeiten = new System.Windows.Forms.Button();
-            this.btn_Lerninhalt_verändern = new System.Windows.Forms.Button();
-            this.pnl_Aktelle_Einträge = new System.Windows.Forms.Panel();
             this.tC_Menüführung.SuspendLayout();
             this.tP_Lernen.SuspendLayout();
+            this.pnl_Aktelle_Einträge.SuspendLayout();
             this.tP_Lerninhalt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Einträge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Unterkategorie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernfeld)).BeginInit();
             this.tP_Einstellungen.SuspendLayout();
-            this.pnl_Aktelle_Einträge.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_Willkommen
@@ -102,6 +102,37 @@ namespace Karteikartensystem
             this.tP_Lernen.Text = "Lernen";
             this.tP_Lernen.UseVisualStyleBackColor = true;
             // 
+            // pnl_Aktelle_Einträge
+            // 
+            this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Viel_Spaß);
+            this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Anzahl_Einträge_1);
+            this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Anzahl_Einträge_2);
+            this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Anzahl_Einträge_Zahl);
+            this.pnl_Aktelle_Einträge.Location = new System.Drawing.Point(248, 218);
+            this.pnl_Aktelle_Einträge.Name = "pnl_Aktelle_Einträge";
+            this.pnl_Aktelle_Einträge.Size = new System.Drawing.Size(655, 153);
+            this.pnl_Aktelle_Einträge.TabIndex = 7;
+            // 
+            // lbl_Viel_Spaß
+            // 
+            this.lbl_Viel_Spaß.AutoSize = true;
+            this.lbl_Viel_Spaß.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Viel_Spaß.Location = new System.Drawing.Point(228, 106);
+            this.lbl_Viel_Spaß.Name = "lbl_Viel_Spaß";
+            this.lbl_Viel_Spaß.Size = new System.Drawing.Size(184, 20);
+            this.lbl_Viel_Spaß.TabIndex = 2;
+            this.lbl_Viel_Spaß.Text = "Viel Spaß beim Lernen:-)";
+            // 
+            // lbl_Anzahl_Einträge_1
+            // 
+            this.lbl_Anzahl_Einträge_1.AutoSize = true;
+            this.lbl_Anzahl_Einträge_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Anzahl_Einträge_1.Location = new System.Drawing.Point(66, 36);
+            this.lbl_Anzahl_Einträge_1.Name = "lbl_Anzahl_Einträge_1";
+            this.lbl_Anzahl_Einträge_1.Size = new System.Drawing.Size(106, 20);
+            this.lbl_Anzahl_Einträge_1.TabIndex = 3;
+            this.lbl_Anzahl_Einträge_1.Text = "Heute stehen";
+            // 
             // lbl_Anzahl_Einträge_2
             // 
             this.lbl_Anzahl_Einträge_2.AutoSize = true;
@@ -122,26 +153,6 @@ namespace Karteikartensystem
             this.lbl_Anzahl_Einträge_Zahl.TabIndex = 4;
             this.lbl_Anzahl_Einträge_Zahl.Text = "hi";
             // 
-            // lbl_Anzahl_Einträge_1
-            // 
-            this.lbl_Anzahl_Einträge_1.AutoSize = true;
-            this.lbl_Anzahl_Einträge_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Anzahl_Einträge_1.Location = new System.Drawing.Point(66, 36);
-            this.lbl_Anzahl_Einträge_1.Name = "lbl_Anzahl_Einträge_1";
-            this.lbl_Anzahl_Einträge_1.Size = new System.Drawing.Size(106, 20);
-            this.lbl_Anzahl_Einträge_1.TabIndex = 3;
-            this.lbl_Anzahl_Einträge_1.Text = "Heute stehen";
-            // 
-            // lbl_Viel_Spaß
-            // 
-            this.lbl_Viel_Spaß.AutoSize = true;
-            this.lbl_Viel_Spaß.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Viel_Spaß.Location = new System.Drawing.Point(228, 106);
-            this.lbl_Viel_Spaß.Name = "lbl_Viel_Spaß";
-            this.lbl_Viel_Spaß.Size = new System.Drawing.Size(184, 20);
-            this.lbl_Viel_Spaß.TabIndex = 2;
-            this.lbl_Viel_Spaß.Text = "Viel Spaß beim Lernen:-)";
-            // 
             // tP_Lerninhalt
             // 
             this.tP_Lerninhalt.Controls.Add(this.btn_Lerninhalt_verändern);
@@ -155,6 +166,16 @@ namespace Karteikartensystem
             this.tP_Lerninhalt.TabIndex = 1;
             this.tP_Lerninhalt.Text = "Lerninhalt";
             this.tP_Lerninhalt.UseVisualStyleBackColor = true;
+            // 
+            // btn_Lerninhalt_verändern
+            // 
+            this.btn_Lerninhalt_verändern.Location = new System.Drawing.Point(379, 561);
+            this.btn_Lerninhalt_verändern.Name = "btn_Lerninhalt_verändern";
+            this.btn_Lerninhalt_verändern.Size = new System.Drawing.Size(230, 23);
+            this.btn_Lerninhalt_verändern.TabIndex = 3;
+            this.btn_Lerninhalt_verändern.Text = "Lerninhalt ändern";
+            this.btn_Lerninhalt_verändern.UseVisualStyleBackColor = true;
+            this.btn_Lerninhalt_verändern.Click += new System.EventHandler(this.btn_Lerninhalt_verändern_Click);
             // 
             // dGV_Einträge
             // 
@@ -173,6 +194,7 @@ namespace Karteikartensystem
             this.dGV_Unterkategorie.ReadOnly = true;
             this.dGV_Unterkategorie.Size = new System.Drawing.Size(240, 452);
             this.dGV_Unterkategorie.TabIndex = 1;
+            this.dGV_Unterkategorie.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGV_Unterkategorie_RowEnter);
             // 
             // dGV_Lernfeld
             // 
@@ -203,27 +225,6 @@ namespace Karteikartensystem
             this.btn_Kästen_bearbeiten.Text = "Kästen bearbeiten";
             this.btn_Kästen_bearbeiten.UseVisualStyleBackColor = true;
             // 
-            // btn_Lerninhalt_verändern
-            // 
-            this.btn_Lerninhalt_verändern.Location = new System.Drawing.Point(379, 561);
-            this.btn_Lerninhalt_verändern.Name = "btn_Lerninhalt_verändern";
-            this.btn_Lerninhalt_verändern.Size = new System.Drawing.Size(230, 23);
-            this.btn_Lerninhalt_verändern.TabIndex = 3;
-            this.btn_Lerninhalt_verändern.Text = "Lerninhalt ändern";
-            this.btn_Lerninhalt_verändern.UseVisualStyleBackColor = true;
-            this.btn_Lerninhalt_verändern.Click += new System.EventHandler(this.btn_Lerninhalt_verändern_Click);
-            // 
-            // pnl_Aktelle_Einträge
-            // 
-            this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Viel_Spaß);
-            this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Anzahl_Einträge_1);
-            this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Anzahl_Einträge_2);
-            this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Anzahl_Einträge_Zahl);
-            this.pnl_Aktelle_Einträge.Location = new System.Drawing.Point(248, 218);
-            this.pnl_Aktelle_Einträge.Name = "pnl_Aktelle_Einträge";
-            this.pnl_Aktelle_Einträge.Size = new System.Drawing.Size(655, 153);
-            this.pnl_Aktelle_Einträge.TabIndex = 7;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,13 +240,13 @@ namespace Karteikartensystem
             this.tC_Menüführung.ResumeLayout(false);
             this.tP_Lernen.ResumeLayout(false);
             this.tP_Lernen.PerformLayout();
+            this.pnl_Aktelle_Einträge.ResumeLayout(false);
+            this.pnl_Aktelle_Einträge.PerformLayout();
             this.tP_Lerninhalt.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Einträge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Unterkategorie)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernfeld)).EndInit();
             this.tP_Einstellungen.ResumeLayout(false);
-            this.pnl_Aktelle_Einträge.ResumeLayout(false);
-            this.pnl_Aktelle_Einträge.PerformLayout();
             this.ResumeLayout(false);
 
         }
