@@ -135,6 +135,13 @@ namespace Karteikartensystem
                                                         "INNER JOIN dbo.tb_Lernfeld " +
                                                         "ON dbo.tb_ZuordnungLernfeldUnterkategorie.LernfeldID = dbo.tb_Lernfeld.LernfeldID " +
                                                         $"WHERE(dbo.tb_Lernfeld.Lernfeldname = N'{ausgewähltesLernfeld}')");
+                
+
+                //Wenn vorhanden, dann werden die Einträge gelöscht, wenn ein anderes Lernfeld ausgewählt wird
+                if (dGV_Einträge.DataSource != null)
+                {
+                    dGV_Einträge.DataSource = null;
+                }
             }
 
         }
