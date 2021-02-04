@@ -28,8 +28,71 @@ namespace Karteikartensystem
             }
         }
 
+        // Tabbedienung (Initialisierung der der einzelnen Tabs)
+        private void tC_Menüführung_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tC_Menüführung.SelectedIndex == 0)
+            {
+                lbl_Anzahl_Einträge_Zahl.Text = GetDataLabel("SELECT COUNT(Abfragedatum) FROM tb_Eintrag");
+            }
+            else if (tC_Menüführung.SelectedIndex == 1)
+            {
+                dGV_Lernfeld.AutoGenerateColumns = true;
+                dGV_Lernfeld.DataSource = GetDataDGV("Select Lernfeldname From tb_Lernfeld As Lernfeldname");
+            }
+            else { }
+        }
 
-        // Test Daten aus Datenbank in Label
+        // Aufruf der Unterkategorien, wenn ein Lernfeld angewählt ist
+        private void dGV_Lernfeld_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dGV_Lernfeld.CurrentCell != null)
+            {
+                dGV_Unterkategorie.AutoGenerateColumns = true;
+                //Ausgewählte Zeile in Variable abspeichern
+                String ausgewähltesLernfeld = Convert.ToString(dGV_Lernfeld.Rows[e.RowIndex].Cells[0].Value);
+
+                dGV_Unterkategorie.DataSource = GetDataDGV("SELECT dbo.tb_Unterkategorie.Unterkategoriename AS Unterkategorie " +
+                                                        "FROM dbo.tb_Unterkategorie " +
+                                                        "INNER JOIN dbo.tb_ZuordnungLernfeldUnterkategorie " +
+                                                        "ON dbo.tb_Unterkategorie.UnterkategorieID = dbo.tb_ZuordnungLernfeldUnterkategorie.UnterkategorieID " +
+                                                        "INNER JOIN dbo.tb_Lernfeld " +
+                                                        "ON dbo.tb_ZuordnungLernfeldUnterkategorie.LernfeldID = dbo.tb_Lernfeld.LernfeldID " +
+                                                        $"WHERE(dbo.tb_Lernfeld.Lernfeldname = N'{ausgewähltesLernfeld}')");
+
+
+                //TODO: Wenn vorhanden, dann werden die Einträge gelöscht, wenn ein anderes Lernfeld ausgewählt wird
+                dGV_Einträge.DataSource = null;
+            }
+
+        }
+
+        private void dGV_Unterkategorie_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dGV_Unterkategorie.CurrentCell != null)
+            {
+                dGV_Einträge.AutoGenerateColumns = true;
+                //Ausgewählte Zeile in Variable abspeichern
+                String ausgewählteUnterkategorie = dGV_Unterkategorie.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+                String ausgewähltesLernfeld = dGV_Lernfeld.CurrentRow.Cells[0].Value.ToString();
+
+                dGV_Einträge.DataSource = GetDataEinträge($@"SELECT dbo.tb_A_Seite.A_SeiteInhalt AS[A - Seite], dbo.tb_B_Seite.B_SeiteInhalt AS[B - Seite]
+                                                            FROM            dbo.tb_A_Seite INNER JOIN
+                                                            dbo.tb_Eintrag ON dbo.tb_A_Seite.A_SeiteID = dbo.tb_Eintrag.A_SeiteID INNER JOIN
+                                                            dbo.tb_B_Seite ON dbo.tb_Eintrag.B_SeiteID = dbo.tb_B_Seite.B_SeiteID INNER JOIN
+                                                            dbo.tb_ZuordnungUnterkategorieEintrag ON dbo.tb_Eintrag.EintragID = dbo.tb_ZuordnungUnterkategorieEintrag.EintragID INNER JOIN
+                                                            dbo.tb_Unterkategorie ON dbo.tb_ZuordnungUnterkategorieEintrag.UnterkategorieID = dbo.tb_Unterkategorie.UnterkategorieID INNER JOIN
+                                                             dbo.tb_ZuordnungLernfeldUnterkategorie ON dbo.tb_Unterkategorie.UnterkategorieID = dbo.tb_ZuordnungLernfeldUnterkategorie.UnterkategorieID INNER JOIN
+                                                                dbo.tb_Lernfeld ON dbo.tb_ZuordnungLernfeldUnterkategorie.LernfeldID = dbo.tb_Lernfeld.LernfeldID
+                                                            WHERE(dbo.tb_Unterkategorie.Unterkategoriename = N'{ausgewählteUnterkategorie}') AND(dbo.tb_Lernfeld.Lernfeldname = N'{ausgewähltesLernfeld}')");
+
+            }
+        }
+
+
+
+        //Daten aus Datenbank in Label
         private static String GetDataLabel(string sqlCommand)
         {
             string connectionString = "Integrated Security=SSPI;" +
@@ -54,6 +117,7 @@ namespace Karteikartensystem
             return ergebnis;
         }
 
+        // Daten aus Datenbank für Mehrer Spalten
         private static DataTable GetDataEinträge(string sqlCommand)
         {
             string connectionString = "Integrated Security=SSPI;" +
@@ -76,7 +140,7 @@ namespace Karteikartensystem
             return table;
         }
 
-        // Daten aus Datenbank abrufen
+        // Daten aus Datenbank für eine Spalte
         private static DataTable GetDataDGV(string sqlCommand)
         {
             string connectionString = "Integrated Security=SSPI;" +
@@ -101,68 +165,6 @@ namespace Karteikartensystem
         }
 
 
-
-
-
-        // Tabbedienung (Initialisierung der der einzelnen Tabs)
-        private void tC_Menüführung_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tC_Menüführung.SelectedIndex == 0)
-            {
-                // Dann lade die aktuelle Anzahl der zu lernenden Karten
-            }
-            else if (tC_Menüführung.SelectedIndex == 1)
-            {
-                dGV_Lernfeld.AutoGenerateColumns = true;
-                dGV_Lernfeld.DataSource = GetDataDGV("Select Lernfeldname From tb_Lernfeld As Lernfeldname");
-            }
-            else{}
-        }
-
-        // Aufruf der Unterkategorien, wenn ein Lernfeld angewählt ist
-        private void dGV_Lernfeld_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dGV_Lernfeld.CurrentCell != null)
-            {
-                dGV_Unterkategorie.AutoGenerateColumns = true;
-                //Ausgewählte Zeile in Variable abspeichern
-                String ausgewähltesLernfeld = Convert.ToString(dGV_Lernfeld.Rows[e.RowIndex].Cells[0].Value);
-
-                dGV_Unterkategorie.DataSource = GetDataDGV("SELECT dbo.tb_Unterkategorie.Unterkategoriename AS Unterkategorie " +
-                                                        "FROM dbo.tb_Unterkategorie " +
-                                                        "INNER JOIN dbo.tb_ZuordnungLernfeldUnterkategorie " +
-                                                        "ON dbo.tb_Unterkategorie.UnterkategorieID = dbo.tb_ZuordnungLernfeldUnterkategorie.UnterkategorieID " +
-                                                        "INNER JOIN dbo.tb_Lernfeld " +
-                                                        "ON dbo.tb_ZuordnungLernfeldUnterkategorie.LernfeldID = dbo.tb_Lernfeld.LernfeldID " +
-                                                        $"WHERE(dbo.tb_Lernfeld.Lernfeldname = N'{ausgewähltesLernfeld}')");
-                
-
-                //Wenn vorhanden, dann werden die Einträge gelöscht, wenn ein anderes Lernfeld ausgewählt wird
-                if (dGV_Einträge.DataSource != null)
-                {
-                    dGV_Einträge.DataSource = null;
-                }
-            }
-
-        }
-
-        private void dGV_Unterkategorie_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dGV_Unterkategorie.CurrentCell != null)
-            {
-                dGV_Einträge.AutoGenerateColumns = true;
-                //Ausgewählte Zeile in Variable abspeichern
-                String ausgewählteUnterkategorie = Convert.ToString(dGV_Unterkategorie.Rows[e.RowIndex].Cells[0].Value);
-
-                dGV_Einträge.DataSource = GetDataEinträge("SELECT dbo.tb_A_Seite.A_SeiteInhalt AS[A - Seite], dbo.tb_B_Seite.B_SeiteInhalt AS[B - Seite]" +
-                                                          "FROM dbo.tb_A_Seite " +
-                                                          "INNER JOIN dbo.tb_Eintrag ON dbo.tb_A_Seite.A_SeiteID = dbo.tb_Eintrag.A_SeiteID " +
-                                                          "INNER JOIN dbo.tb_B_Seite ON dbo.tb_Eintrag.B_SeiteID = dbo.tb_B_Seite.B_SeiteID " +
-                                                          "INNER JOIN dbo.tb_ZuordnungUnterkategorieEintrag ON dbo.tb_Eintrag.EintragID = dbo.tb_ZuordnungUnterkategorieEintrag.EintragID " +
-                                                          "INNER JOIN dbo.tb_Unterkategorie ON dbo.tb_ZuordnungUnterkategorieEintrag.UnterkategorieID = dbo.tb_Unterkategorie.UnterkategorieID " +
-                                                          $"WHERE(dbo.tb_Unterkategorie.Unterkategoriename = N'{ausgewählteUnterkategorie}')");
-            }
-        }
 
         private void btn_Lerninhalt_verändern_Click(object sender, EventArgs e)
         {
