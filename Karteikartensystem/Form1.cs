@@ -77,7 +77,7 @@ namespace Karteikartensystem
 
                 String ausgewähltesLernfeld = dGV_Lernfeld.CurrentRow.Cells[0].Value.ToString();
 
-                dGV_Einträge.DataSource = GetDataEinträge($@"SELECT dbo.tb_A_Seite.A_SeiteInhalt AS[A - Seite], dbo.tb_B_Seite.B_SeiteInhalt AS[B - Seite]
+                dGV_Einträge.DataSource = GetDataDGV($@"SELECT dbo.tb_A_Seite.A_SeiteInhalt AS[A - Seite], dbo.tb_B_Seite.B_SeiteInhalt AS[B - Seite]
                                                             FROM            dbo.tb_A_Seite INNER JOIN
                                                             dbo.tb_Eintrag ON dbo.tb_A_Seite.A_SeiteID = dbo.tb_Eintrag.A_SeiteID INNER JOIN
                                                             dbo.tb_B_Seite ON dbo.tb_Eintrag.B_SeiteID = dbo.tb_B_Seite.B_SeiteID INNER JOIN
@@ -118,7 +118,7 @@ namespace Karteikartensystem
         }
 
         // Daten aus Datenbank für Mehrer Spalten
-        private static DataTable GetDataEinträge(string sqlCommand)
+        private static DataTable GetDataDGV(string sqlCommand)
         {
             string connectionString = "Integrated Security=SSPI;" +
                 "Persist Security Info=False;" +
@@ -128,41 +128,17 @@ namespace Karteikartensystem
 
             using (SqlConnection karteikartensystemConnection = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand(sqlCommand, karteikartensystemConnection);
-
                 karteikartensystemConnection.Open();
 
-                SqlDataReader reader = command.ExecuteReader();
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand, karteikartensystemConnection);
 
-                table.Load(reader);
+                adapter.Fill(table);
             }
 
             return table;
         }
 
-        // Daten aus Datenbank für eine Spalte
-        private static DataTable GetDataDGV(string sqlCommand)
-        {
-            string connectionString = "Integrated Security=SSPI;" +
-                "Persist Security Info=False;" +
-                "Initial Catalog=Karteikartensystem;Data Source=localhost";
 
-            SqlConnection karteikartensystemConnection = new SqlConnection(connectionString);
-
-            //karteikartensystemConnection.Open();
-
-            SqlCommand command = new SqlCommand(sqlCommand, karteikartensystemConnection);
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            adapter.SelectCommand = command;
-
-            DataTable table = new DataTable();
-            //table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            adapter.Fill(table);
-
-            //karteikartensystemConnection.Close();
-
-            return table;
-        }
 
 
 
