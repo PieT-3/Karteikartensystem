@@ -39,14 +39,14 @@ namespace Karteikartensystem
             this.lbl_Anzahl_Einträge_2 = new System.Windows.Forms.Label();
             this.lbl_Anzahl_Einträge_Zahl = new System.Windows.Forms.Label();
             this.tP_Lerninhalt = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btn_Lerninhalt_verändern = new System.Windows.Forms.Button();
+            this.btn_Bearbeitung_verlassen = new System.Windows.Forms.Button();
+            this.btn_Lerninhalt_bearbeiten = new System.Windows.Forms.Button();
             this.dGV_Einträge = new System.Windows.Forms.DataGridView();
             this.dGV_Unterkategorie = new System.Windows.Forms.DataGridView();
             this.dGV_Lernfeld = new System.Windows.Forms.DataGridView();
             this.tP_Einstellungen = new System.Windows.Forms.TabPage();
             this.btn_Kästen_bearbeiten = new System.Windows.Forms.Button();
+            this.btn_Lernen_beenden = new System.Windows.Forms.Button();
             this.tC_Menüführung.SuspendLayout();
             this.tP_Lernen.SuspendLayout();
             this.pnl_Aktelle_Einträge.SuspendLayout();
@@ -70,7 +70,7 @@ namespace Karteikartensystem
             // btn_Lernen_heute
             // 
             this.btn_Lernen_heute.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Lernen_heute.Location = new System.Drawing.Point(431, 493);
+            this.btn_Lernen_heute.Location = new System.Drawing.Point(198, 460);
             this.btn_Lernen_heute.Name = "btn_Lernen_heute";
             this.btn_Lernen_heute.Size = new System.Drawing.Size(286, 87);
             this.btn_Lernen_heute.TabIndex = 1;
@@ -93,6 +93,7 @@ namespace Karteikartensystem
             // 
             // tP_Lernen
             // 
+            this.tP_Lernen.Controls.Add(this.btn_Lernen_beenden);
             this.tP_Lernen.Controls.Add(this.pnl_Aktelle_Einträge);
             this.tP_Lernen.Controls.Add(this.btn_Lernen_heute);
             this.tP_Lernen.Controls.Add(this.lbl_Willkommen);
@@ -157,9 +158,8 @@ namespace Karteikartensystem
             // 
             // tP_Lerninhalt
             // 
-            this.tP_Lerninhalt.Controls.Add(this.button2);
-            this.tP_Lerninhalt.Controls.Add(this.button1);
-            this.tP_Lerninhalt.Controls.Add(this.btn_Lerninhalt_verändern);
+            this.tP_Lerninhalt.Controls.Add(this.btn_Bearbeitung_verlassen);
+            this.tP_Lerninhalt.Controls.Add(this.btn_Lerninhalt_bearbeiten);
             this.tP_Lerninhalt.Controls.Add(this.dGV_Einträge);
             this.tP_Lerninhalt.Controls.Add(this.dGV_Unterkategorie);
             this.tP_Lerninhalt.Controls.Add(this.dGV_Lernfeld);
@@ -171,33 +171,25 @@ namespace Karteikartensystem
             this.tP_Lerninhalt.Text = "Lerninhalt";
             this.tP_Lerninhalt.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_Bearbeitung_verlassen
             // 
-            this.button2.Location = new System.Drawing.Point(691, 561);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_Bearbeitung_verlassen.Location = new System.Drawing.Point(521, 561);
+            this.btn_Bearbeitung_verlassen.Name = "btn_Bearbeitung_verlassen";
+            this.btn_Bearbeitung_verlassen.Size = new System.Drawing.Size(179, 23);
+            this.btn_Bearbeitung_verlassen.TabIndex = 4;
+            this.btn_Bearbeitung_verlassen.Text = "Bearbeitung verlassen";
+            this.btn_Bearbeitung_verlassen.UseVisualStyleBackColor = true;
+            this.btn_Bearbeitung_verlassen.Click += new System.EventHandler(this.btn_Bearbeitung_verlassen_Click);
             // 
-            // button1
+            // btn_Lerninhalt_bearbeiten
             // 
-            this.button1.Location = new System.Drawing.Point(521, 561);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btn_Lerninhalt_verändern
-            // 
-            this.btn_Lerninhalt_verändern.Location = new System.Drawing.Point(158, 560);
-            this.btn_Lerninhalt_verändern.Name = "btn_Lerninhalt_verändern";
-            this.btn_Lerninhalt_verändern.Size = new System.Drawing.Size(230, 23);
-            this.btn_Lerninhalt_verändern.TabIndex = 3;
-            this.btn_Lerninhalt_verändern.Text = "Lerninhalt ändern";
-            this.btn_Lerninhalt_verändern.UseVisualStyleBackColor = true;
-            this.btn_Lerninhalt_verändern.Click += new System.EventHandler(this.btn_Lerninhalt_verändern_Click);
+            this.btn_Lerninhalt_bearbeiten.Location = new System.Drawing.Point(158, 560);
+            this.btn_Lerninhalt_bearbeiten.Name = "btn_Lerninhalt_bearbeiten";
+            this.btn_Lerninhalt_bearbeiten.Size = new System.Drawing.Size(230, 23);
+            this.btn_Lerninhalt_bearbeiten.TabIndex = 3;
+            this.btn_Lerninhalt_bearbeiten.Text = "Lerninhalt bearbeiten";
+            this.btn_Lerninhalt_bearbeiten.UseVisualStyleBackColor = true;
+            this.btn_Lerninhalt_bearbeiten.Click += new System.EventHandler(this.btn_Lerninhalt_bearbeiten_Click);
             // 
             // dGV_Einträge
             // 
@@ -247,6 +239,16 @@ namespace Karteikartensystem
             this.btn_Kästen_bearbeiten.Text = "Kästen bearbeiten";
             this.btn_Kästen_bearbeiten.UseVisualStyleBackColor = true;
             // 
+            // btn_Lernen_beenden
+            // 
+            this.btn_Lernen_beenden.Location = new System.Drawing.Point(722, 498);
+            this.btn_Lernen_beenden.Name = "btn_Lernen_beenden";
+            this.btn_Lernen_beenden.Size = new System.Drawing.Size(246, 23);
+            this.btn_Lernen_beenden.TabIndex = 8;
+            this.btn_Lernen_beenden.Text = "Lernen beenden";
+            this.btn_Lernen_beenden.UseVisualStyleBackColor = true;
+            this.btn_Lernen_beenden.Click += new System.EventHandler(this.btn_Lernen_beenden_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,10 +291,10 @@ namespace Karteikartensystem
         private System.Windows.Forms.DataGridView dGV_Unterkategorie;
         private System.Windows.Forms.DataGridView dGV_Lernfeld;
         private System.Windows.Forms.Button btn_Kästen_bearbeiten;
-        private System.Windows.Forms.Button btn_Lerninhalt_verändern;
+        private System.Windows.Forms.Button btn_Lerninhalt_bearbeiten;
         private System.Windows.Forms.Panel pnl_Aktelle_Einträge;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Bearbeitung_verlassen;
+        private System.Windows.Forms.Button btn_Lernen_beenden;
     }
 }
 

@@ -39,6 +39,13 @@ namespace Karteikartensystem
             {
                 dGV_Lernfeld.AutoGenerateColumns = true;
                 dGV_Lernfeld.DataSource = GetDataDGV("Select Lernfeldname From tb_Lernfeld As Lernfeldname");
+
+                dGV_Lernfeld.ReadOnly = true;
+                dGV_Unterkategorie.ReadOnly = true;
+                dGV_Einträge.ReadOnly = true;
+
+                btn_Lerninhalt_bearbeiten.Enabled = true;
+                btn_Bearbeitung_verlassen.Enabled = false;
             }
             else { }
         }
@@ -61,12 +68,12 @@ namespace Karteikartensystem
                                                         $"WHERE(dbo.tb_Lernfeld.Lernfeldname = N'{ausgewähltesLernfeld}')");
 
 
-                //TODO: Wenn vorhanden, dann werden die Einträge gelöscht, wenn ein anderes Lernfeld ausgewählt wird
                 dGV_Einträge.DataSource = null;
             }
 
         }
 
+        // Aufruf der Einträge, wenn eine Unterkategorie angewählt ist
         private void dGV_Unterkategorie_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (dGV_Unterkategorie.CurrentCell != null)
@@ -89,8 +96,6 @@ namespace Karteikartensystem
 
             }
         }
-
-
 
         //Daten aus Datenbank in Label
         private static String GetDataLabel(string sqlCommand)
@@ -138,51 +143,45 @@ namespace Karteikartensystem
             return table;
         }
 
-
-
-
-
-        private void btn_Lerninhalt_verändern_Click(object sender, EventArgs e)
+        private void btn_Lerninhalt_bearbeiten_Click(object sender, EventArgs e)
         {
-            if (btn_Lerninhalt_verändern.Text == "Lerninhalt ändern")
-            {
-                dGV_Lernfeld.ReadOnly = false;
-                dGV_Unterkategorie.ReadOnly = false;
-                dGV_Einträge.ReadOnly = false;
+            dGV_Lernfeld.ReadOnly = false;
+            dGV_Unterkategorie.ReadOnly = false;
+            dGV_Einträge.ReadOnly = false;
 
-                btn_Lerninhalt_verändern.Text = "Bearbeitungsmodus verlassen";
-            }
-            else
-            {
-                dGV_Lernfeld.ReadOnly = true;
-                dGV_Unterkategorie.ReadOnly = true;
-                dGV_Einträge.ReadOnly = true;
+            btn_Lerninhalt_bearbeiten.Enabled = false;
+            btn_Bearbeitung_verlassen.Enabled = true;
+        }
 
-                btn_Lerninhalt_verändern.Text = "Lerninhalt ändern";
-            }
+
+        private void btn_Bearbeitung_verlassen_Click(object sender, EventArgs e)
+        {
+            dGV_Lernfeld.ReadOnly = true;
+            dGV_Unterkategorie.ReadOnly = true;
+            dGV_Einträge.ReadOnly = true;
+
+            btn_Lerninhalt_bearbeiten.Enabled = true;
+            btn_Bearbeitung_verlassen.Enabled = false;
         }
 
         private void btn_Lernen_heute_Click(object sender, EventArgs e)
         {
+            lbl_Anzahl_Einträge_1.Visible = false;
+            lbl_Anzahl_Einträge_2.Visible = false;
+            lbl_Anzahl_Einträge_Zahl.Visible = false;
 
-            if (btn_Lernen_heute.Text == "Lernen heute")
-            {
-                dGV_Lernfeld.ReadOnly = false;
-                dGV_Unterkategorie.ReadOnly = false;
-                dGV_Einträge.ReadOnly = false;
-
-                btn_Lerninhalt_verändern.Text = "Lernen unterbrechen";
-            }
-            else
-            {
-                dGV_Lernfeld.ReadOnly = true;
-                dGV_Unterkategorie.ReadOnly = true;
-                dGV_Einträge.ReadOnly = true;
-
-                btn_Lerninhalt_verändern.Text = "Lernen heute";
-            }
-
+            btn_Lernen_heute.Enabled = false;
+            btn_Lernen_beenden.Enabled = true;
         }
 
+        private void btn_Lernen_beenden_Click(object sender, EventArgs e)
+        {
+            lbl_Anzahl_Einträge_1.Visible = true;
+            lbl_Anzahl_Einträge_2.Visible = true;
+            lbl_Anzahl_Einträge_Zahl.Visible = true;
+
+            btn_Lernen_heute.Enabled = true;
+            btn_Lernen_beenden.Enabled = false;
+        }
     }
 }
