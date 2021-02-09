@@ -181,6 +181,12 @@ namespace Karteikartensystem
 
             btn_Lernen_heute.Enabled = false;
             btn_Lernen_beenden.Enabled = true;
+
+            dGV_Lernen_heute.DataSource = GetDataDGV($@"SELECT dbo.tb_A_Seite.A_SeiteInhalt, dbo.tb_B_Seite.B_SeiteInhalt
+                                                        FROM dbo.tb_A_Seite 
+                                                        INNER JOIN dbo.tb_Eintrag ON dbo.tb_A_Seite.A_SeiteID = dbo.tb_Eintrag.A_SeiteID 
+                                                        INNER JOIN dbo.tb_B_Seite ON dbo.tb_Eintrag.B_SeiteID = dbo.tb_B_Seite.B_SeiteID
+                                                        WHERE(dbo.tb_Eintrag.Abfragedatum <= GETDATE())");
         }
 
         private void btn_Lernen_beenden_Click(object sender, EventArgs e)

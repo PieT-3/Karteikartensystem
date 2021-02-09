@@ -52,6 +52,7 @@ namespace Karteikartensystem
             this.btn_Gewusst = new System.Windows.Forms.Button();
             this.btn_Nicht_Gewusst = new System.Windows.Forms.Button();
             this.btn_Antwort = new System.Windows.Forms.Button();
+            this.dGV_Lernen_heute = new System.Windows.Forms.DataGridView();
             this.tC_Menüführung.SuspendLayout();
             this.tP_Lernen.SuspendLayout();
             this.pnl_Aktelle_Einträge.SuspendLayout();
@@ -60,6 +61,7 @@ namespace Karteikartensystem
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Unterkategorie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernfeld)).BeginInit();
             this.pnl_Lernen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernen_heute)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_Willkommen
@@ -75,7 +77,7 @@ namespace Karteikartensystem
             // btn_Lernen_heute
             // 
             this.btn_Lernen_heute.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Lernen_heute.Location = new System.Drawing.Point(198, 460);
+            this.btn_Lernen_heute.Location = new System.Drawing.Point(197, 484);
             this.btn_Lernen_heute.Name = "btn_Lernen_heute";
             this.btn_Lernen_heute.Size = new System.Drawing.Size(286, 87);
             this.btn_Lernen_heute.TabIndex = 1;
@@ -98,6 +100,7 @@ namespace Karteikartensystem
             // 
             // tP_Lernen
             // 
+            this.tP_Lernen.Controls.Add(this.dGV_Lernen_heute);
             this.tP_Lernen.Controls.Add(this.pnl_Lernen);
             this.tP_Lernen.Controls.Add(this.btn_Lernen_beenden);
             this.tP_Lernen.Controls.Add(this.pnl_Aktelle_Einträge);
@@ -302,6 +305,14 @@ namespace Karteikartensystem
             this.btn_Antwort.Text = "Antwort";
             this.btn_Antwort.UseVisualStyleBackColor = true;
             // 
+            // dGV_Lernen_heute
+            // 
+            this.dGV_Lernen_heute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_Lernen_heute.Location = new System.Drawing.Point(914, 17);
+            this.dGV_Lernen_heute.Name = "dGV_Lernen_heute";
+            this.dGV_Lernen_heute.Size = new System.Drawing.Size(240, 150);
+            this.dGV_Lernen_heute.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -324,6 +335,7 @@ namespace Karteikartensystem
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Unterkategorie)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernfeld)).EndInit();
             this.pnl_Lernen.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernen_heute)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -353,6 +365,7 @@ namespace Karteikartensystem
         private System.Windows.Forms.Button btn_Gewusst;
         private System.Windows.Forms.Label lbl_Abfrage_B_Seite;
         private System.Windows.Forms.Label lbl_Abfrage_A_Seite;
+        private System.Windows.Forms.DataGridView dGV_Lernen_heute;
     }
 }
 
