@@ -33,6 +33,7 @@ namespace Karteikartensystem
             this.btn_Lernen_heute = new System.Windows.Forms.Button();
             this.tC_Menüführung = new System.Windows.Forms.TabControl();
             this.tP_Lernen = new System.Windows.Forms.TabPage();
+            this.btn_Lernen_beenden = new System.Windows.Forms.Button();
             this.pnl_Aktelle_Einträge = new System.Windows.Forms.Panel();
             this.lbl_Viel_Spaß = new System.Windows.Forms.Label();
             this.lbl_Anzahl_Einträge_1 = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@ namespace Karteikartensystem
             this.dGV_Lernfeld = new System.Windows.Forms.DataGridView();
             this.tP_Einstellungen = new System.Windows.Forms.TabPage();
             this.btn_Kästen_bearbeiten = new System.Windows.Forms.Button();
-            this.btn_Lernen_beenden = new System.Windows.Forms.Button();
             this.tC_Menüführung.SuspendLayout();
             this.tP_Lernen.SuspendLayout();
             this.pnl_Aktelle_Einträge.SuspendLayout();
@@ -104,6 +104,16 @@ namespace Karteikartensystem
             this.tP_Lernen.TabIndex = 0;
             this.tP_Lernen.Text = "Lernen";
             this.tP_Lernen.UseVisualStyleBackColor = true;
+            // 
+            // btn_Lernen_beenden
+            // 
+            this.btn_Lernen_beenden.Location = new System.Drawing.Point(722, 498);
+            this.btn_Lernen_beenden.Name = "btn_Lernen_beenden";
+            this.btn_Lernen_beenden.Size = new System.Drawing.Size(246, 23);
+            this.btn_Lernen_beenden.TabIndex = 8;
+            this.btn_Lernen_beenden.Text = "Lernen beenden";
+            this.btn_Lernen_beenden.UseVisualStyleBackColor = true;
+            this.btn_Lernen_beenden.Click += new System.EventHandler(this.btn_Lernen_beenden_Click);
             // 
             // pnl_Aktelle_Einträge
             // 
@@ -238,16 +248,6 @@ namespace Karteikartensystem
             this.btn_Kästen_bearbeiten.TabIndex = 0;
             this.btn_Kästen_bearbeiten.Text = "Kästen bearbeiten";
             this.btn_Kästen_bearbeiten.UseVisualStyleBackColor = true;
-            // 
-            // btn_Lernen_beenden
-            // 
-            this.btn_Lernen_beenden.Location = new System.Drawing.Point(722, 498);
-            this.btn_Lernen_beenden.Name = "btn_Lernen_beenden";
-            this.btn_Lernen_beenden.Size = new System.Drawing.Size(246, 23);
-            this.btn_Lernen_beenden.TabIndex = 8;
-            this.btn_Lernen_beenden.Text = "Lernen beenden";
-            this.btn_Lernen_beenden.UseVisualStyleBackColor = true;
-            this.btn_Lernen_beenden.Click += new System.EventHandler(this.btn_Lernen_beenden_Click);
             // 
             // Form1
             // 

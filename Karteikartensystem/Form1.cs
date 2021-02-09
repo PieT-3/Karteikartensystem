@@ -19,6 +19,7 @@ namespace Karteikartensystem
 
             try
             {
+                pnl_Aktelle_Einträge.Visible = true;
                 lbl_Anzahl_Einträge_Zahl.Text = GetDataLabel("SELECT COUNT(Abfragedatum) FROM tb_Eintrag");
             }
             catch (Exception ex)
@@ -33,6 +34,7 @@ namespace Karteikartensystem
         {
             if (tC_Menüführung.SelectedIndex == 0)
             {
+                pnl_Aktelle_Einträge.Visible = true;
                 lbl_Anzahl_Einträge_Zahl.Text = GetDataLabel("SELECT COUNT(Abfragedatum) FROM tb_Eintrag");
             }
             else if (tC_Menüführung.SelectedIndex == 1)
@@ -85,17 +87,23 @@ namespace Karteikartensystem
                 String ausgewähltesLernfeld = dGV_Lernfeld.CurrentRow.Cells[0].Value.ToString();
 
                 dGV_Einträge.DataSource = GetDataDGV($@"SELECT dbo.tb_A_Seite.A_SeiteInhalt AS[A - Seite], dbo.tb_B_Seite.B_SeiteInhalt AS[B - Seite]
-                                                            FROM            dbo.tb_A_Seite INNER JOIN
-                                                            dbo.tb_Eintrag ON dbo.tb_A_Seite.A_SeiteID = dbo.tb_Eintrag.A_SeiteID INNER JOIN
-                                                            dbo.tb_B_Seite ON dbo.tb_Eintrag.B_SeiteID = dbo.tb_B_Seite.B_SeiteID INNER JOIN
-                                                            dbo.tb_ZuordnungUnterkategorieEintrag ON dbo.tb_Eintrag.EintragID = dbo.tb_ZuordnungUnterkategorieEintrag.EintragID INNER JOIN
-                                                            dbo.tb_Unterkategorie ON dbo.tb_ZuordnungUnterkategorieEintrag.UnterkategorieID = dbo.tb_Unterkategorie.UnterkategorieID INNER JOIN
-                                                             dbo.tb_ZuordnungLernfeldUnterkategorie ON dbo.tb_Unterkategorie.UnterkategorieID = dbo.tb_ZuordnungLernfeldUnterkategorie.UnterkategorieID INNER JOIN
-                                                                dbo.tb_Lernfeld ON dbo.tb_ZuordnungLernfeldUnterkategorie.LernfeldID = dbo.tb_Lernfeld.LernfeldID
-                                                            WHERE(dbo.tb_Unterkategorie.Unterkategoriename = N'{ausgewählteUnterkategorie}') AND(dbo.tb_Lernfeld.Lernfeldname = N'{ausgewähltesLernfeld}')");
+                                                        FROM dbo.tb_A_Seite 
+                                                        INNER JOIN dbo.tb_Eintrag ON dbo.tb_A_Seite.A_SeiteID = dbo.tb_Eintrag.A_SeiteID 
+                                                        INNER JOIN dbo.tb_B_Seite ON dbo.tb_Eintrag.B_SeiteID = dbo.tb_B_Seite.B_SeiteID 
+                                                        INNER JOIN dbo.tb_ZuordnungUnterkategorieEintrag 
+                                                        ON dbo.tb_Eintrag.EintragID = dbo.tb_ZuordnungUnterkategorieEintrag.EintragID 
+                                                        INNER JOIN dbo.tb_Unterkategorie 
+                                                        ON dbo.tb_ZuordnungUnterkategorieEintrag.UnterkategorieID = dbo.tb_Unterkategorie.UnterkategorieID 
+                                                        INNER JOIN dbo.tb_ZuordnungLernfeldUnterkategorie 
+                                                        ON dbo.tb_Unterkategorie.UnterkategorieID = dbo.tb_ZuordnungLernfeldUnterkategorie.UnterkategorieID 
+                                                        INNER JOIN dbo.tb_Lernfeld 
+                                                        ON dbo.tb_ZuordnungLernfeldUnterkategorie.LernfeldID = dbo.tb_Lernfeld.LernfeldID
+                                                        WHERE(dbo.tb_Unterkategorie.Unterkategoriename = N'{ausgewählteUnterkategorie}') 
+                                                        AND(dbo.tb_Lernfeld.Lernfeldname = N'{ausgewähltesLernfeld}')");
 
             }
         }
+
 
         //Daten aus Datenbank in Label
         private static String GetDataLabel(string sqlCommand)
@@ -166,9 +174,7 @@ namespace Karteikartensystem
 
         private void btn_Lernen_heute_Click(object sender, EventArgs e)
         {
-            lbl_Anzahl_Einträge_1.Visible = false;
-            lbl_Anzahl_Einträge_2.Visible = false;
-            lbl_Anzahl_Einträge_Zahl.Visible = false;
+            pnl_Aktelle_Einträge.Visible = false;
 
             btn_Lernen_heute.Enabled = false;
             btn_Lernen_beenden.Enabled = true;
@@ -176,12 +182,11 @@ namespace Karteikartensystem
 
         private void btn_Lernen_beenden_Click(object sender, EventArgs e)
         {
-            lbl_Anzahl_Einträge_1.Visible = true;
-            lbl_Anzahl_Einträge_2.Visible = true;
-            lbl_Anzahl_Einträge_Zahl.Visible = true;
+            pnl_Aktelle_Einträge.Visible = true;
 
             btn_Lernen_heute.Enabled = true;
             btn_Lernen_beenden.Enabled = false;
         }
+
     }
 }
