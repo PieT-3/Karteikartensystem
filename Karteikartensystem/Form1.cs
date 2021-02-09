@@ -20,6 +20,7 @@ namespace Karteikartensystem
             try
             {
                 pnl_Aktelle_Einträge.Visible = true;
+                pnl_Lernen.Visible = false;
                 lbl_Anzahl_Einträge_Zahl.Text = GetDataLabel("SELECT COUNT(Abfragedatum) FROM tb_Eintrag");
             }
             catch (Exception ex)
@@ -35,6 +36,7 @@ namespace Karteikartensystem
             if (tC_Menüführung.SelectedIndex == 0)
             {
                 pnl_Aktelle_Einträge.Visible = true;
+                pnl_Lernen.Visible = false;
                 lbl_Anzahl_Einträge_Zahl.Text = GetDataLabel("SELECT COUNT(Abfragedatum) FROM tb_Eintrag");
             }
             else if (tC_Menüführung.SelectedIndex == 1)
@@ -175,6 +177,7 @@ namespace Karteikartensystem
         private void btn_Lernen_heute_Click(object sender, EventArgs e)
         {
             pnl_Aktelle_Einträge.Visible = false;
+            pnl_Lernen.Visible = true;
 
             btn_Lernen_heute.Enabled = false;
             btn_Lernen_beenden.Enabled = true;
@@ -183,6 +186,7 @@ namespace Karteikartensystem
         private void btn_Lernen_beenden_Click(object sender, EventArgs e)
         {
             pnl_Aktelle_Einträge.Visible = true;
+            pnl_Lernen.Visible = false;
 
             btn_Lernen_heute.Enabled = true;
             btn_Lernen_beenden.Enabled = false;

@@ -46,7 +46,12 @@ namespace Karteikartensystem
             this.dGV_Unterkategorie = new System.Windows.Forms.DataGridView();
             this.dGV_Lernfeld = new System.Windows.Forms.DataGridView();
             this.tP_Einstellungen = new System.Windows.Forms.TabPage();
-            this.btn_Kästen_bearbeiten = new System.Windows.Forms.Button();
+            this.pnl_Lernen = new System.Windows.Forms.Panel();
+            this.lbl_Abfrage_A_Seite = new System.Windows.Forms.Label();
+            this.lbl_Abfrage_B_Seite = new System.Windows.Forms.Label();
+            this.btn_Gewusst = new System.Windows.Forms.Button();
+            this.btn_Nicht_Gewusst = new System.Windows.Forms.Button();
+            this.btn_Antwort = new System.Windows.Forms.Button();
             this.tC_Menüführung.SuspendLayout();
             this.tP_Lernen.SuspendLayout();
             this.pnl_Aktelle_Einträge.SuspendLayout();
@@ -54,7 +59,7 @@ namespace Karteikartensystem
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Einträge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Unterkategorie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernfeld)).BeginInit();
-            this.tP_Einstellungen.SuspendLayout();
+            this.pnl_Lernen.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_Willkommen
@@ -93,6 +98,7 @@ namespace Karteikartensystem
             // 
             // tP_Lernen
             // 
+            this.tP_Lernen.Controls.Add(this.pnl_Lernen);
             this.tP_Lernen.Controls.Add(this.btn_Lernen_beenden);
             this.tP_Lernen.Controls.Add(this.pnl_Aktelle_Einträge);
             this.tP_Lernen.Controls.Add(this.btn_Lernen_heute);
@@ -121,9 +127,9 @@ namespace Karteikartensystem
             this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Anzahl_Einträge_1);
             this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Anzahl_Einträge_2);
             this.pnl_Aktelle_Einträge.Controls.Add(this.lbl_Anzahl_Einträge_Zahl);
-            this.pnl_Aktelle_Einträge.Location = new System.Drawing.Point(256, 217);
+            this.pnl_Aktelle_Einträge.Location = new System.Drawing.Point(590, 205);
             this.pnl_Aktelle_Einträge.Name = "pnl_Aktelle_Einträge";
-            this.pnl_Aktelle_Einträge.Size = new System.Drawing.Size(655, 153);
+            this.pnl_Aktelle_Einträge.Size = new System.Drawing.Size(590, 153);
             this.pnl_Aktelle_Einträge.TabIndex = 7;
             // 
             // lbl_Viel_Spaß
@@ -140,7 +146,7 @@ namespace Karteikartensystem
             // 
             this.lbl_Anzahl_Einträge_1.AutoSize = true;
             this.lbl_Anzahl_Einträge_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Anzahl_Einträge_1.Location = new System.Drawing.Point(143, 36);
+            this.lbl_Anzahl_Einträge_1.Location = new System.Drawing.Point(139, 36);
             this.lbl_Anzahl_Einträge_1.Name = "lbl_Anzahl_Einträge_1";
             this.lbl_Anzahl_Einträge_1.Size = new System.Drawing.Size(106, 20);
             this.lbl_Anzahl_Einträge_1.TabIndex = 3;
@@ -232,7 +238,6 @@ namespace Karteikartensystem
             // 
             // tP_Einstellungen
             // 
-            this.tP_Einstellungen.Controls.Add(this.btn_Kästen_bearbeiten);
             this.tP_Einstellungen.Location = new System.Drawing.Point(4, 22);
             this.tP_Einstellungen.Name = "tP_Einstellungen";
             this.tP_Einstellungen.Size = new System.Drawing.Size(1176, 635);
@@ -240,14 +245,62 @@ namespace Karteikartensystem
             this.tP_Einstellungen.Text = "Einstellungen";
             this.tP_Einstellungen.UseVisualStyleBackColor = true;
             // 
-            // btn_Kästen_bearbeiten
+            // pnl_Lernen
             // 
-            this.btn_Kästen_bearbeiten.Location = new System.Drawing.Point(522, 208);
-            this.btn_Kästen_bearbeiten.Name = "btn_Kästen_bearbeiten";
-            this.btn_Kästen_bearbeiten.Size = new System.Drawing.Size(198, 23);
-            this.btn_Kästen_bearbeiten.TabIndex = 0;
-            this.btn_Kästen_bearbeiten.Text = "Kästen bearbeiten";
-            this.btn_Kästen_bearbeiten.UseVisualStyleBackColor = true;
+            this.pnl_Lernen.Controls.Add(this.btn_Antwort);
+            this.pnl_Lernen.Controls.Add(this.btn_Nicht_Gewusst);
+            this.pnl_Lernen.Controls.Add(this.btn_Gewusst);
+            this.pnl_Lernen.Controls.Add(this.lbl_Abfrage_B_Seite);
+            this.pnl_Lernen.Controls.Add(this.lbl_Abfrage_A_Seite);
+            this.pnl_Lernen.Location = new System.Drawing.Point(19, 160);
+            this.pnl_Lernen.Name = "pnl_Lernen";
+            this.pnl_Lernen.Size = new System.Drawing.Size(552, 278);
+            this.pnl_Lernen.TabIndex = 9;
+            // 
+            // lbl_Abfrage_A_Seite
+            // 
+            this.lbl_Abfrage_A_Seite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_Abfrage_A_Seite.Location = new System.Drawing.Point(49, 45);
+            this.lbl_Abfrage_A_Seite.Name = "lbl_Abfrage_A_Seite";
+            this.lbl_Abfrage_A_Seite.Size = new System.Drawing.Size(241, 119);
+            this.lbl_Abfrage_A_Seite.TabIndex = 0;
+            // 
+            // lbl_Abfrage_B_Seite
+            // 
+            this.lbl_Abfrage_B_Seite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_Abfrage_B_Seite.Location = new System.Drawing.Point(287, 45);
+            this.lbl_Abfrage_B_Seite.Name = "lbl_Abfrage_B_Seite";
+            this.lbl_Abfrage_B_Seite.Size = new System.Drawing.Size(241, 119);
+            this.lbl_Abfrage_B_Seite.TabIndex = 1;
+            // 
+            // btn_Gewusst
+            // 
+            this.btn_Gewusst.BackColor = System.Drawing.Color.GreenYellow;
+            this.btn_Gewusst.Location = new System.Drawing.Point(49, 167);
+            this.btn_Gewusst.Name = "btn_Gewusst";
+            this.btn_Gewusst.Size = new System.Drawing.Size(241, 46);
+            this.btn_Gewusst.TabIndex = 2;
+            this.btn_Gewusst.Text = "Gewusst";
+            this.btn_Gewusst.UseVisualStyleBackColor = false;
+            // 
+            // btn_Nicht_Gewusst
+            // 
+            this.btn_Nicht_Gewusst.BackColor = System.Drawing.Color.Red;
+            this.btn_Nicht_Gewusst.Location = new System.Drawing.Point(287, 167);
+            this.btn_Nicht_Gewusst.Name = "btn_Nicht_Gewusst";
+            this.btn_Nicht_Gewusst.Size = new System.Drawing.Size(241, 46);
+            this.btn_Nicht_Gewusst.TabIndex = 3;
+            this.btn_Nicht_Gewusst.Text = "Nicht gewusst";
+            this.btn_Nicht_Gewusst.UseVisualStyleBackColor = false;
+            // 
+            // btn_Antwort
+            // 
+            this.btn_Antwort.Location = new System.Drawing.Point(49, 219);
+            this.btn_Antwort.Name = "btn_Antwort";
+            this.btn_Antwort.Size = new System.Drawing.Size(479, 46);
+            this.btn_Antwort.TabIndex = 4;
+            this.btn_Antwort.Text = "Antwort";
+            this.btn_Antwort.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -270,7 +323,7 @@ namespace Karteikartensystem
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Einträge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Unterkategorie)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernfeld)).EndInit();
-            this.tP_Einstellungen.ResumeLayout(false);
+            this.pnl_Lernen.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -290,11 +343,16 @@ namespace Karteikartensystem
         private System.Windows.Forms.DataGridView dGV_Einträge;
         private System.Windows.Forms.DataGridView dGV_Unterkategorie;
         private System.Windows.Forms.DataGridView dGV_Lernfeld;
-        private System.Windows.Forms.Button btn_Kästen_bearbeiten;
         private System.Windows.Forms.Button btn_Lerninhalt_bearbeiten;
         private System.Windows.Forms.Panel pnl_Aktelle_Einträge;
         private System.Windows.Forms.Button btn_Bearbeitung_verlassen;
         private System.Windows.Forms.Button btn_Lernen_beenden;
+        private System.Windows.Forms.Panel pnl_Lernen;
+        private System.Windows.Forms.Button btn_Antwort;
+        private System.Windows.Forms.Button btn_Nicht_Gewusst;
+        private System.Windows.Forms.Button btn_Gewusst;
+        private System.Windows.Forms.Label lbl_Abfrage_B_Seite;
+        private System.Windows.Forms.Label lbl_Abfrage_A_Seite;
     }
 }
 
