@@ -22,6 +22,7 @@ namespace Karteikartensystem
                 pnl_Aktelle_Einträge.Visible = true;
                 pnl_Lernen.Visible = false;
                 btn_Lernen_beenden.Visible = false;
+                
                 lbl_Anzahl_Einträge_Zahl.Text = GetDataLabel("SELECT COUNT(Abfragedatum) FROM tb_Eintrag");
             }
             catch (Exception ex)
@@ -185,8 +186,8 @@ namespace Karteikartensystem
             btn_Nicht_Gewusst.Enabled = false;
             btn_Antwort.Enabled = true;
 
-            btn_Lernen_heute.Enabled = false;
-            btn_Lernen_beenden.Enabled = true;
+            btn_Lernen_heute.Visible = false;
+            btn_Lernen_beenden.Visible = true;
 
             dGV_Lernen_heute.DataSource = GetDataDGV($@"SELECT dbo.tb_A_Seite.A_SeiteInhalt, dbo.tb_B_Seite.B_SeiteInhalt
                                                         FROM dbo.tb_A_Seite 
@@ -209,8 +210,8 @@ namespace Karteikartensystem
             pnl_Aktelle_Einträge.Visible = true;
             pnl_Lernen.Visible = false;
 
-            btn_Lernen_heute.Enabled = true;
-            btn_Lernen_beenden.Enabled = false;
+            btn_Lernen_heute.Visible = true;
+            btn_Lernen_beenden.Visible = false;
         }
 
         private void btn_Antwort_Click(object sender, EventArgs e)
@@ -247,12 +248,23 @@ namespace Karteikartensystem
                 }
             }
 
-            lbl_Abfrage_A_Seite.Text = dGV_Lernen_heute.Rows[zeilenIndex].Cells[0].Value.ToString();
-            lbl_Abfrage_B_Seite.Text = "";
+            if (dGV_Lernen_heute.Rows[zeilenIndex].Cells[0].Value == null)
+            {
+                MessageBox.Show("Gut gemacht. Heute gibt es keine weiteren Lernkarten.");
+                pnl_Lernen.Visible = false;
+                pnl_Aktelle_Einträge.Visible = true;
+                btn_Lernen_heute.Visible = true;
+                btn_Lernen_beenden.Visible = false;
+            }
+            else
+            {
+                lbl_Abfrage_A_Seite.Text = dGV_Lernen_heute.Rows[zeilenIndex].Cells[0].Value.ToString();
+                lbl_Abfrage_B_Seite.Text = "";
 
-            btn_Antwort.Enabled =true;
-            btn_Gewusst.Enabled = false;
-            btn_Nicht_Gewusst.Enabled = false;
+                btn_Antwort.Enabled = true;
+                btn_Gewusst.Enabled = false;
+                btn_Nicht_Gewusst.Enabled = false;
+            }
         }
 
         private void btn_Nicht_Gewusst_Click(object sender, EventArgs e)
@@ -268,13 +280,23 @@ namespace Karteikartensystem
                     break;
                 }
             }
+            if (dGV_Lernen_heute.Rows[zeilenIndex].Cells[0].Value == null)
+            {
+                MessageBox.Show("Gut gemacht. Heute gibt es keine weiteren Lernkarten.");
+                pnl_Lernen.Visible = false;
+                pnl_Aktelle_Einträge.Visible = true;
+                btn_Lernen_heute.Visible = true;
+                btn_Lernen_beenden.Visible = false;
+            }
+            else
+            {
+                lbl_Abfrage_A_Seite.Text = dGV_Lernen_heute.Rows[zeilenIndex].Cells[0].Value.ToString();
+                lbl_Abfrage_B_Seite.Text = "";
 
-            lbl_Abfrage_A_Seite.Text = dGV_Lernen_heute.Rows[zeilenIndex].Cells[0].Value.ToString();
-            lbl_Abfrage_B_Seite.Text = "";
-
-            btn_Antwort.Enabled = true;
-            btn_Gewusst.Enabled = false;
-            btn_Nicht_Gewusst.Enabled = false;
+                btn_Antwort.Enabled = true;
+                btn_Gewusst.Enabled = false;
+                btn_Nicht_Gewusst.Enabled = false;
+            }
         }
     }
 }
