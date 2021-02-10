@@ -235,12 +235,46 @@ namespace Karteikartensystem
 
         private void btn_Gewusst_Click(object sender, EventArgs e)
         {
+            String suchWert = lbl_Abfrage_A_Seite.Text;
+            int zeilenIndex = -1;
+            foreach (DataGridViewRow zeile in dGV_Lernen_heute.Rows)
+            {
+                if (zeile.Cells[0].Value.ToString().Equals(suchWert))
+                {
+                    zeilenIndex = zeile.Index;
+                    zeilenIndex += 1;
+                    break;
+                }
+            }
 
+            lbl_Abfrage_A_Seite.Text = dGV_Lernen_heute.Rows[zeilenIndex].Cells[0].Value.ToString();
+            lbl_Abfrage_B_Seite.Text = "";
+
+            btn_Antwort.Enabled =true;
+            btn_Gewusst.Enabled = false;
+            btn_Nicht_Gewusst.Enabled = false;
         }
 
         private void btn_Nicht_Gewusst_Click(object sender, EventArgs e)
         {
+            String suchWert = lbl_Abfrage_A_Seite.Text;
+            int zeilenIndex = -1;
+            foreach (DataGridViewRow zeile in dGV_Lernen_heute.Rows)
+            {
+                if (zeile.Cells[0].Value.ToString().Equals(suchWert))
+                {
+                    zeilenIndex = zeile.Index;
+                    zeilenIndex += 1;
+                    break;
+                }
+            }
 
+            lbl_Abfrage_A_Seite.Text = dGV_Lernen_heute.Rows[zeilenIndex].Cells[0].Value.ToString();
+            lbl_Abfrage_B_Seite.Text = "";
+
+            btn_Antwort.Enabled = true;
+            btn_Gewusst.Enabled = false;
+            btn_Nicht_Gewusst.Enabled = false;
         }
     }
 }
