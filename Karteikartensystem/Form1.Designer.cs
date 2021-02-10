@@ -33,6 +33,13 @@ namespace Karteikartensystem
             this.btn_Lernen_heute = new System.Windows.Forms.Button();
             this.tC_Menüführung = new System.Windows.Forms.TabControl();
             this.tP_Lernen = new System.Windows.Forms.TabPage();
+            this.dGV_Lernen_heute = new System.Windows.Forms.DataGridView();
+            this.pnl_Lernen = new System.Windows.Forms.Panel();
+            this.btn_Antwort = new System.Windows.Forms.Button();
+            this.btn_Nicht_Gewusst = new System.Windows.Forms.Button();
+            this.btn_Gewusst = new System.Windows.Forms.Button();
+            this.lbl_Abfrage_B_Seite = new System.Windows.Forms.Label();
+            this.lbl_Abfrage_A_Seite = new System.Windows.Forms.Label();
             this.btn_Lernen_beenden = new System.Windows.Forms.Button();
             this.pnl_Aktelle_Einträge = new System.Windows.Forms.Panel();
             this.lbl_Viel_Spaß = new System.Windows.Forms.Label();
@@ -46,22 +53,15 @@ namespace Karteikartensystem
             this.dGV_Unterkategorie = new System.Windows.Forms.DataGridView();
             this.dGV_Lernfeld = new System.Windows.Forms.DataGridView();
             this.tP_Einstellungen = new System.Windows.Forms.TabPage();
-            this.pnl_Lernen = new System.Windows.Forms.Panel();
-            this.lbl_Abfrage_A_Seite = new System.Windows.Forms.Label();
-            this.lbl_Abfrage_B_Seite = new System.Windows.Forms.Label();
-            this.btn_Gewusst = new System.Windows.Forms.Button();
-            this.btn_Nicht_Gewusst = new System.Windows.Forms.Button();
-            this.btn_Antwort = new System.Windows.Forms.Button();
-            this.dGV_Lernen_heute = new System.Windows.Forms.DataGridView();
             this.tC_Menüführung.SuspendLayout();
             this.tP_Lernen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernen_heute)).BeginInit();
+            this.pnl_Lernen.SuspendLayout();
             this.pnl_Aktelle_Einträge.SuspendLayout();
             this.tP_Lerninhalt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Einträge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Unterkategorie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernfeld)).BeginInit();
-            this.pnl_Lernen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernen_heute)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_Willkommen
@@ -113,6 +113,74 @@ namespace Karteikartensystem
             this.tP_Lernen.TabIndex = 0;
             this.tP_Lernen.Text = "Lernen";
             this.tP_Lernen.UseVisualStyleBackColor = true;
+            // 
+            // dGV_Lernen_heute
+            // 
+            this.dGV_Lernen_heute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_Lernen_heute.Location = new System.Drawing.Point(914, 17);
+            this.dGV_Lernen_heute.Name = "dGV_Lernen_heute";
+            this.dGV_Lernen_heute.Size = new System.Drawing.Size(240, 150);
+            this.dGV_Lernen_heute.TabIndex = 10;
+            // 
+            // pnl_Lernen
+            // 
+            this.pnl_Lernen.Controls.Add(this.btn_Antwort);
+            this.pnl_Lernen.Controls.Add(this.btn_Nicht_Gewusst);
+            this.pnl_Lernen.Controls.Add(this.btn_Gewusst);
+            this.pnl_Lernen.Controls.Add(this.lbl_Abfrage_B_Seite);
+            this.pnl_Lernen.Controls.Add(this.lbl_Abfrage_A_Seite);
+            this.pnl_Lernen.Location = new System.Drawing.Point(19, 160);
+            this.pnl_Lernen.Name = "pnl_Lernen";
+            this.pnl_Lernen.Size = new System.Drawing.Size(552, 278);
+            this.pnl_Lernen.TabIndex = 9;
+            // 
+            // btn_Antwort
+            // 
+            this.btn_Antwort.Location = new System.Drawing.Point(49, 219);
+            this.btn_Antwort.Name = "btn_Antwort";
+            this.btn_Antwort.Size = new System.Drawing.Size(479, 46);
+            this.btn_Antwort.TabIndex = 4;
+            this.btn_Antwort.Text = "Antwort";
+            this.btn_Antwort.UseVisualStyleBackColor = true;
+            this.btn_Antwort.Click += new System.EventHandler(this.btn_Antwort_Click);
+            // 
+            // btn_Nicht_Gewusst
+            // 
+            this.btn_Nicht_Gewusst.BackColor = System.Drawing.Color.Red;
+            this.btn_Nicht_Gewusst.Location = new System.Drawing.Point(287, 167);
+            this.btn_Nicht_Gewusst.Name = "btn_Nicht_Gewusst";
+            this.btn_Nicht_Gewusst.Size = new System.Drawing.Size(241, 46);
+            this.btn_Nicht_Gewusst.TabIndex = 3;
+            this.btn_Nicht_Gewusst.Text = "Nicht gewusst";
+            this.btn_Nicht_Gewusst.UseVisualStyleBackColor = false;
+            this.btn_Nicht_Gewusst.Click += new System.EventHandler(this.btn_Nicht_Gewusst_Click);
+            // 
+            // btn_Gewusst
+            // 
+            this.btn_Gewusst.BackColor = System.Drawing.Color.GreenYellow;
+            this.btn_Gewusst.Location = new System.Drawing.Point(49, 167);
+            this.btn_Gewusst.Name = "btn_Gewusst";
+            this.btn_Gewusst.Size = new System.Drawing.Size(241, 46);
+            this.btn_Gewusst.TabIndex = 2;
+            this.btn_Gewusst.Text = "Gewusst";
+            this.btn_Gewusst.UseVisualStyleBackColor = false;
+            this.btn_Gewusst.Click += new System.EventHandler(this.btn_Gewusst_Click);
+            // 
+            // lbl_Abfrage_B_Seite
+            // 
+            this.lbl_Abfrage_B_Seite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_Abfrage_B_Seite.Location = new System.Drawing.Point(287, 45);
+            this.lbl_Abfrage_B_Seite.Name = "lbl_Abfrage_B_Seite";
+            this.lbl_Abfrage_B_Seite.Size = new System.Drawing.Size(241, 119);
+            this.lbl_Abfrage_B_Seite.TabIndex = 1;
+            // 
+            // lbl_Abfrage_A_Seite
+            // 
+            this.lbl_Abfrage_A_Seite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_Abfrage_A_Seite.Location = new System.Drawing.Point(49, 45);
+            this.lbl_Abfrage_A_Seite.Name = "lbl_Abfrage_A_Seite";
+            this.lbl_Abfrage_A_Seite.Size = new System.Drawing.Size(241, 119);
+            this.lbl_Abfrage_A_Seite.TabIndex = 0;
             // 
             // btn_Lernen_beenden
             // 
@@ -248,71 +316,6 @@ namespace Karteikartensystem
             this.tP_Einstellungen.Text = "Einstellungen";
             this.tP_Einstellungen.UseVisualStyleBackColor = true;
             // 
-            // pnl_Lernen
-            // 
-            this.pnl_Lernen.Controls.Add(this.btn_Antwort);
-            this.pnl_Lernen.Controls.Add(this.btn_Nicht_Gewusst);
-            this.pnl_Lernen.Controls.Add(this.btn_Gewusst);
-            this.pnl_Lernen.Controls.Add(this.lbl_Abfrage_B_Seite);
-            this.pnl_Lernen.Controls.Add(this.lbl_Abfrage_A_Seite);
-            this.pnl_Lernen.Location = new System.Drawing.Point(19, 160);
-            this.pnl_Lernen.Name = "pnl_Lernen";
-            this.pnl_Lernen.Size = new System.Drawing.Size(552, 278);
-            this.pnl_Lernen.TabIndex = 9;
-            // 
-            // lbl_Abfrage_A_Seite
-            // 
-            this.lbl_Abfrage_A_Seite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_Abfrage_A_Seite.Location = new System.Drawing.Point(49, 45);
-            this.lbl_Abfrage_A_Seite.Name = "lbl_Abfrage_A_Seite";
-            this.lbl_Abfrage_A_Seite.Size = new System.Drawing.Size(241, 119);
-            this.lbl_Abfrage_A_Seite.TabIndex = 0;
-            // 
-            // lbl_Abfrage_B_Seite
-            // 
-            this.lbl_Abfrage_B_Seite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_Abfrage_B_Seite.Location = new System.Drawing.Point(287, 45);
-            this.lbl_Abfrage_B_Seite.Name = "lbl_Abfrage_B_Seite";
-            this.lbl_Abfrage_B_Seite.Size = new System.Drawing.Size(241, 119);
-            this.lbl_Abfrage_B_Seite.TabIndex = 1;
-            // 
-            // btn_Gewusst
-            // 
-            this.btn_Gewusst.BackColor = System.Drawing.Color.GreenYellow;
-            this.btn_Gewusst.Location = new System.Drawing.Point(49, 167);
-            this.btn_Gewusst.Name = "btn_Gewusst";
-            this.btn_Gewusst.Size = new System.Drawing.Size(241, 46);
-            this.btn_Gewusst.TabIndex = 2;
-            this.btn_Gewusst.Text = "Gewusst";
-            this.btn_Gewusst.UseVisualStyleBackColor = false;
-            // 
-            // btn_Nicht_Gewusst
-            // 
-            this.btn_Nicht_Gewusst.BackColor = System.Drawing.Color.Red;
-            this.btn_Nicht_Gewusst.Location = new System.Drawing.Point(287, 167);
-            this.btn_Nicht_Gewusst.Name = "btn_Nicht_Gewusst";
-            this.btn_Nicht_Gewusst.Size = new System.Drawing.Size(241, 46);
-            this.btn_Nicht_Gewusst.TabIndex = 3;
-            this.btn_Nicht_Gewusst.Text = "Nicht gewusst";
-            this.btn_Nicht_Gewusst.UseVisualStyleBackColor = false;
-            // 
-            // btn_Antwort
-            // 
-            this.btn_Antwort.Location = new System.Drawing.Point(49, 219);
-            this.btn_Antwort.Name = "btn_Antwort";
-            this.btn_Antwort.Size = new System.Drawing.Size(479, 46);
-            this.btn_Antwort.TabIndex = 4;
-            this.btn_Antwort.Text = "Antwort";
-            this.btn_Antwort.UseVisualStyleBackColor = true;
-            // 
-            // dGV_Lernen_heute
-            // 
-            this.dGV_Lernen_heute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGV_Lernen_heute.Location = new System.Drawing.Point(914, 17);
-            this.dGV_Lernen_heute.Name = "dGV_Lernen_heute";
-            this.dGV_Lernen_heute.Size = new System.Drawing.Size(240, 150);
-            this.dGV_Lernen_heute.TabIndex = 10;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,14 +331,14 @@ namespace Karteikartensystem
             this.tC_Menüführung.ResumeLayout(false);
             this.tP_Lernen.ResumeLayout(false);
             this.tP_Lernen.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernen_heute)).EndInit();
+            this.pnl_Lernen.ResumeLayout(false);
             this.pnl_Aktelle_Einträge.ResumeLayout(false);
             this.pnl_Aktelle_Einträge.PerformLayout();
             this.tP_Lerninhalt.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Einträge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Unterkategorie)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernfeld)).EndInit();
-            this.pnl_Lernen.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_Lernen_heute)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -21,6 +21,7 @@ namespace Karteikartensystem
             {
                 pnl_Aktelle_Einträge.Visible = true;
                 pnl_Lernen.Visible = false;
+                btn_Lernen_beenden.Visible = false;
                 lbl_Anzahl_Einträge_Zahl.Text = GetDataLabel("SELECT COUNT(Abfragedatum) FROM tb_Eintrag");
             }
             catch (Exception ex)
@@ -37,6 +38,7 @@ namespace Karteikartensystem
             {
                 pnl_Aktelle_Einträge.Visible = true;
                 pnl_Lernen.Visible = false;
+                btn_Lernen_beenden.Visible = false;
                 lbl_Anzahl_Einträge_Zahl.Text = GetDataLabel("SELECT COUNT(Abfragedatum) FROM tb_Eintrag");
             }
             else if (tC_Menüführung.SelectedIndex == 1)
@@ -179,6 +181,10 @@ namespace Karteikartensystem
             pnl_Aktelle_Einträge.Visible = false;
             pnl_Lernen.Visible = true;
 
+            btn_Gewusst.Enabled = false;
+            btn_Nicht_Gewusst.Enabled = false;
+            btn_Antwort.Enabled = true;
+
             btn_Lernen_heute.Enabled = false;
             btn_Lernen_beenden.Enabled = true;
 
@@ -187,6 +193,15 @@ namespace Karteikartensystem
                                                         INNER JOIN dbo.tb_Eintrag ON dbo.tb_A_Seite.A_SeiteID = dbo.tb_Eintrag.A_SeiteID 
                                                         INNER JOIN dbo.tb_B_Seite ON dbo.tb_Eintrag.B_SeiteID = dbo.tb_B_Seite.B_SeiteID
                                                         WHERE(dbo.tb_Eintrag.Abfragedatum <= GETDATE())");
+
+            if (dGV_Lernen_heute.DataSource != null)
+            {
+                lbl_Abfrage_A_Seite.Text = dGV_Lernen_heute.Rows[0].Cells[0].Value.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Heute gibt es keine Lernkarten.");
+            }
         }
 
         private void btn_Lernen_beenden_Click(object sender, EventArgs e)
@@ -198,5 +213,34 @@ namespace Karteikartensystem
             btn_Lernen_beenden.Enabled = false;
         }
 
+        private void btn_Antwort_Click(object sender, EventArgs e)
+        {
+            String suchWert = lbl_Abfrage_A_Seite.Text;
+            int zeilenIndex = -1;
+            foreach (DataGridViewRow zeile in dGV_Lernen_heute.Rows)
+            {
+                if (zeile.Cells[0].Value.ToString().Equals(suchWert))
+                {
+                    zeilenIndex = zeile.Index;
+                    break;
+                }
+            }
+
+            lbl_Abfrage_B_Seite.Text = dGV_Lernen_heute.Rows[zeilenIndex].Cells[1].Value.ToString();
+
+            btn_Antwort.Enabled = false;
+            btn_Gewusst.Enabled = true;
+            btn_Nicht_Gewusst.Enabled = true;
+        }
+
+        private void btn_Gewusst_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Nicht_Gewusst_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
